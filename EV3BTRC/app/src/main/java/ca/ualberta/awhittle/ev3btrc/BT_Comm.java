@@ -9,6 +9,8 @@ package ca.ualberta.awhittle.ev3btrc;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.UUID;
 
 
@@ -21,13 +23,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class BT_Comm {
+    private static final String SPP_UUID = "00001101-0000-1000-8000-00805F9B34FB";
 
     //Target NXTs for communication
-    final String nxt2 = "00:16:53:04:52:3A";
-    final String nxt1 = "00:16:53:07:AA:F6";
+    //final String nxt2 = "00:16:53:04:52:3A";
+    //final String nxt1 = "00:16:53:07:AA:F6";
 
     BluetoothAdapter localAdapter;
-    BluetoothSocket socket_ev3_1,socket_nxt2;
+    BluetoothSocket socket_ev3_1, socket_nxt2;
     boolean success=false;
     private boolean btPermission=false;
 
@@ -75,12 +78,24 @@ public class BT_Comm {
 
 
             socket_ev3_1 = ev3_1.createRfcommSocketToServiceRecord(UUID
-                    .fromString("00001101-0000-1000-8000-00805F9B34FB"));
+                    .fromString(SPP_UUID));
 
 
             //socket_nxt2.connect();
 
-
+        /*    Method m = null;
+            try {
+                m = ev3_1.getClass().getMethod("createRfcommSocket", new Class[] { int.class });
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            try {
+                socket_ev3_1 = (BluetoothSocket) m.invoke(ev3_1, 1);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }*/
 
             socket_ev3_1.connect();
 
@@ -90,7 +105,7 @@ public class BT_Comm {
 
 
         } catch (IOException e) {
-            Log.d("Bluetooth","Err: Device not found or cannot connect");
+            Log.d("Bluetooth","Err: Device not found or cannot connect " + macAdd);
             success=false;
 
 
