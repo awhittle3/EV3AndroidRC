@@ -9,4 +9,15 @@
     <string name="cancel">Cancel</string>
     <string name="enter_macadd">Please enter the EV3 mac address</string>
     <string name="default_macadd">Mac Address</string>
+    <string name="bt_permission_request">Enable Bluetooth?</string>
+    <string name="allow">Allow</string>
+    <string name="bt_enabled">Bluetooth enabled</string>
+    <string name="exit">Exit</string>
+    <string name="faster">Faster</string>
+    <string name="right">Right</string>
+    <string name="forwards">Forwards</string>
+    <string name="left">Left</string>
+    <string name="backwards">Backwards</string>
+    <string name="slower">Slower</string>
+    <string name="bt_failed">Could not connect to given mac address</string>
 </resources>

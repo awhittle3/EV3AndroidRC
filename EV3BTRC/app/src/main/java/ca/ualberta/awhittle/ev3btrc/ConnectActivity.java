@@ -17,8 +17,6 @@ import android.widget.EditText;
 public class ConnectActivity extends AppCompatActivity {
 
     SharedPreferences sharedpreferences;
-    public static final String MyPREFERENCES = "ev3btrc_Prefs" ;
-    public static final String EV3KEY = "ev3btrc_macadd";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +25,11 @@ public class ConnectActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences(getString(R.string.MyPREFERENCES), Context.MODE_PRIVATE);
 
         final Button button = (Button) findViewById(R.id.connectButton);
         final EditText macAddText = (EditText) findViewById(R.id.editMacAddText);
-        macAddText.setText(sharedpreferences.getString(EV3KEY,""));
+        macAddText.setText(sharedpreferences.getString(getString(R.string.EV3KEY),""));
 
 
 
@@ -66,7 +64,7 @@ public class ConnectActivity extends AppCompatActivity {
                 } else {
 
                     SharedPreferences.Editor speditor = sharedpreferences.edit();
-                    speditor.putString(EV3KEY, macAddText.getText().toString());
+                    speditor.putString(getString(R.string.EV3KEY), macAddText.getText().toString());
                     speditor.commit();
 
                     // Proceed to RC activity
