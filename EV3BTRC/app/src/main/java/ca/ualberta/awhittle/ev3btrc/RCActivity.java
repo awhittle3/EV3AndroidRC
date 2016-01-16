@@ -10,12 +10,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class RCActivity extends AppCompatActivity {
 
     BT_Comm btComm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +64,190 @@ public class RCActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        
+        final Button buttonF = (Button) findViewById(R.id.buttonF);
+
+        buttonF.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    try {
+                        btComm.writeMessage((byte) 1);
+                        return true;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        return false;
+                    }
+
+                case MotionEvent.ACTION_UP:
+                    try {
+                        btComm.writeMessage((byte) 10);
+                        return true;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        return false;
+                    }
+                }
 
 
+                return false;
+            }
+        });
+
+        final Button buttonB = (Button) findViewById(R.id.buttonB);
+
+        buttonB.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        try {
+                            btComm.writeMessage((byte) 2);
+                            return true;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+
+                    case MotionEvent.ACTION_UP:
+                        try {
+                            btComm.writeMessage((byte) 10);
+                            return true;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+                }
+
+
+                return false;
+            }
+        });
+
+        final Button buttonL = (Button) findViewById(R.id.buttonL);
+
+        buttonL.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        try {
+                            btComm.writeMessage((byte) 3);
+                            return true;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+
+                    case MotionEvent.ACTION_UP:
+                        try {
+                            btComm.writeMessage((byte) 10);
+                            return true;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+                }
+
+
+                return false;
+            }
+        });
+
+        final Button buttonR = (Button) findViewById(R.id.buttonR);
+
+        buttonR.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        try {
+                            btComm.writeMessage((byte) 4);
+                            return true;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+
+                    case MotionEvent.ACTION_UP:
+                        try {
+                            btComm.writeMessage((byte) 10);
+                            return true;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+                }
+
+
+                return false;
+            }
+        });
+
+        final Button buttonFast = (Button) findViewById(R.id.buttonFast);
+
+        buttonFast.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        try {
+                            btComm.writeMessage((byte) 5);
+                            return true;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+
+                }
+
+
+                return false;
+            }
+        });
+
+        final Button buttonSlow = (Button) findViewById(R.id.buttonSlow);
+
+        buttonSlow.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        try {
+                            btComm.writeMessage((byte) 6);
+                            return true;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+
+                }
+
+
+                return false;
+            }
+        });
+
+        final Button buttonExit = (Button) findViewById(R.id.buttonExit);
+
+        buttonExit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        try {
+                            btComm.writeMessage((byte) 7);
+                            Intent intent = new Intent(RCActivity.this, ConnectActivity.class);
+                            startActivity(intent);
+                            return true;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+                }
+                return false;
+            }
+        });
 
     }
 
