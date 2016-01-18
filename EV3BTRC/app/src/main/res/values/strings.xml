@@ -20,4 +20,5 @@
     <string name="backwards">Backwards</string>
     <string name="slower">Slower</string>
     <string name="bt_failed">Could not connect to given mac address</string>
+    <string name="bt_disabled">Please enable Bluetooth</string>
 </resources>

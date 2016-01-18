@@ -33,18 +33,26 @@ public class BT_Comm {
     BluetoothSocket socket_ev3_1, socket_nxt2;
     boolean success=false;
     private boolean btPermission=false;
+    private boolean alertReplied=false;
 
+    public void reply(){this.alertReplied = true;}
     public void setBtPermission(boolean btPermission) {
         this.btPermission = btPermission;
     }
 
+    public boolean initBT(){
+        localAdapter=BluetoothAdapter.getDefaultAdapter();
+        return localAdapter.isEnabled();
+    }
+
     //Enables Bluetooth if not enabled
     // Modified to ask permission and show a toast
-    public boolean enableBT(AlertDialog alert, Toast toast){
+    /*public boolean enableBT(AlertDialog alert, Toast toast){
         localAdapter=BluetoothAdapter.getDefaultAdapter();
         //If Bluetooth not enable then do it
         if(localAdapter.isEnabled()==false){
             alert.show();
+            while(!alertReplied){}
             if(btPermission) {
                 localAdapter.enable();
             } else {
@@ -61,7 +69,7 @@ public class BT_Comm {
             return true;
         }
 
-    }
+    }*/
 
     //connect to both NXTs
     public  boolean connectToEV3(String macAdd){

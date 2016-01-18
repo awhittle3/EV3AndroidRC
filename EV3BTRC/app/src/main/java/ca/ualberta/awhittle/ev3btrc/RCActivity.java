@@ -36,11 +36,13 @@ public class RCActivity extends AppCompatActivity {
         builder.setPositiveButton(R.string.allow, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 btComm.setBtPermission(true);
+                btComm.reply();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 btComm.setBtPermission(false);
+                btComm.reply();
             }
         });
 
@@ -48,17 +50,27 @@ public class RCActivity extends AppCompatActivity {
         AlertDialog btPermissionAlert = builder.create();
 
         Context context = getApplicationContext();
-        CharSequence text1 = getString(R.string.bt_enabled);
+        //CharSequence text1 = getString(R.string.bt_enabled);
+        CharSequence text1 = getString(R.string.bt_disabled);
         CharSequence text2 = getString(R.string.bt_failed);
 
-        Toast btEnabledToast = Toast.makeText(context, text1, Toast.LENGTH_SHORT);
+
+        Toast btDisabledToast = Toast.makeText(context, text1, Toast.LENGTH_LONG);
         Toast btFailedToast = Toast.makeText(context, text2, Toast.LENGTH_LONG);
 
         SharedPreferences sharedpreferences = getSharedPreferences(getString(R.string.MyPREFERENCES), Context.MODE_PRIVATE);
 
-        if(!btComm.enableBT(btPermissionAlert, btEnabledToast) ||
-                !btComm.connectToEV3(sharedpreferences.getString(getString(R.string.EV3KEY), ""))){
-            // If user denies enabling on bt, or cannot connect to given mac address, return to connect activity
+        //if(btComm.enableBT(btPermissionAlert, btEnabledToast)){
+        //}
+        if(!btComm.initBT()){
+            // User did not enable Bluetooth
+            btDisabledToast.show();
+            Intent intent = new Intent(RCActivity.this, ConnectActivity.class);
+            startActivity(intent);
+        }
+
+        if(!btComm.connectToEV3(sharedpreferences.getString(getString(R.string.EV3KEY), ""))){
+            //Cannot connect to given mac address, return to connect activity
             btFailedToast.show();
             Intent intent = new Intent(RCActivity.this, ConnectActivity.class);
             startActivity(intent);
