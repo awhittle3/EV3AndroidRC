@@ -20,3 +20,5 @@ http://developer.android.com/tools/studio/index.html
 6. Start the program on the EV3 and hit the Connect button in the app.
 
 7. Control the EV3!
+
+Tested with Lejos firmware version 0.8.1
